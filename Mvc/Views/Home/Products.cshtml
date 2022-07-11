@@ -1,0 +1,46 @@
+﻿@model ProductsModel
+    <!-- DevExtreme theme -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/22.1.3/css/dx.light.css">
+ 
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/22.1.3/js/dx.all.js"></script>
+<div class="dx-viewport">
+    <div id="gridContainer" style="width:100%"></div>
+</div>
+<script type="text/javascript">
+    //Load serialized model
+    var viewModel = @Html.Raw(Model.ToJson());
+    $(document).ready(function() {
+        $("#gridContainer").dxDataGrid({
+            dataSource:viewModel.Products,
+            columns: [
+                'ProductId',
+                'ProductCode',
+                {
+                dataField: 'ProductImage',
+                width: 200,
+                allowFiltering: false,
+                allowSorting: false,
+                cellTemplate(container, options) {
+                    $('<div class="gridimg">')
+                        .append($('<img>', { src: options.value }))
+                        .appendTo(container);
+                    },
+                },
+                'Price',
+                'PriceFormated',
+            ]
+        })
+    })
+
+
+    //use view model
+
+    /*var dataSection = $("#Code");
+    $.each(viewModel.Products,function(){
+        dataSection.append("<div>code: "+this.ProductCode+" price: "+this.Price+"</div>");
+    });*/
+</script>
