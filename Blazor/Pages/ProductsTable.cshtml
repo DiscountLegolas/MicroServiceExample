@@ -1,9 +1,0 @@
-﻿@page "/products"
-@model Blazor.Pages.ProductsTableModel
-@{
-    <p>@Model.products.Count</p>
-    foreach (var item in Model.products)
-    {
-        <p>@item.ProductImageUrl</p>
-    }
-}
